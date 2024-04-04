@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delivery System</title>
+  <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.24/webcam.js"></script>
+  <style media="screen">
+
+    .sidebar {
+      background: #2f323a;
+      margin-top: 70px;
+      padding-top: 30px;
+      position: fixed;
+      left: 0;
+      width: 250px;
+      height: 100%; 
+    }
+
+    .sidebar a {
+      color: #fff;
+      display: block;
+      width: 100%;
+      line-height: 60px;
+      text-decoration: none;
+      padding-left: 40px;
+    }
+
+    .sidebar a:hover {
+      background: #0B5ED7;
+    }
+
+    .sidebar i {
+      padding-right: 10px;
+    }
+
+    .content {
+      margin-left: 250px;
+      height: 100vh;
+    }
+
+  </style>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark d-flex justify-content-between p-3 position-fixed w-100">
+      <div>
+        <a class="navbar-brand" href="#">Delivery System <i class="fa-solid fa-truck p-1"></i></a>
+      </div>
+      
+      <div >
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link btn btn-primary" href="{% url 'home' %}">logout</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    
+  <!--sidebar start-->
+  <div class="sidebar">
+    <div class="text-center">
+      <img src="{% static 'img/admin.png' %}" width="100px" class="profile_image" alt="admin">
+      <h4 class="text-white">{{request.user}}</h4>
+    </div>
+ {% if request.user.is_superuser %}
+ 
+ <a href="{% url 'employeelist' %}"><i class="fas fa-users"></i><span>Delivery Boy</span></a>
+ <a href="{% url 'customerlist' %}"><i class="fas fa-users"></i><span>Customer</span></a>
+ <a href="{% url 'order_create' %}"><i class="fas fa-list-alt"></i><span>Request Order</span></a>
+ <a href="{% url 'delivery_status' %}"><i class="fa-solid fa-map-location-dot"></i><span>Order Status</span></a>
+ 
+
+ {% else %}
+
+ <a href="{% url 'delivery_status' %}"><i class="fas fa-list-alt"></i><span>Order request</span></a>
+ {% endif %}
+    
+  </div>
+  <!--sidebar end-->
+
+  <!--content start-->
+  <div class="content">
+    <br><br><br><br>
+    {% block basecontent %}
+
+    {% endblock basecontent %}
+
+  </div>
+  <!--content end-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  
+</body>
+</html>

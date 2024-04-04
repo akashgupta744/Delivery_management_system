@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+{% block main %}
+<style>
+    body{
+        background-image: url(../static/img/emma.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+<div class="mainhome" >
+
+    <h3 class="text-center text-white">Order Status</h3>
+    <div class="m-3">
+        <table class="table table-hover table-active" >
+            <thead class="table-info">
+                
+                <th>Product Name</th>
+                <th>Product img</th>
+                <th>Product Price</th>
+                <th>Address</th>
+                <th>Delivery boy</th>
+                <th>Status</th>
+                
+            </thead>
+            {% for p in detail %}
+            <tr>
+            
+            <td>{{p.product_name}}</td>
+            <td><img src="{{p.product_img.url}}" alt="no" width="100px" height="70px"></td>
+            <td>{{p.product_price}}</td>
+            <td>{{p.customer_name.address}}</td>
+            <td>{{p.delivery_boy}}</td>
+            <td>{{p.status}}</td>
+            
+        </tr>
+            {% endfor %}
+        </table>
+</div>
+  
+{% endblock main %}

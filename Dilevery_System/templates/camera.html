@@ -1,0 +1,93 @@
+{% extends "adminbase.html" %}
+{% load static %}
+{% block basecontent %}
+    
+    <div class="container">	
+        <div class="row">
+          <div class="col-lg-6" align="center">
+              <label>Capture Delivered item photo for OrderId <span>{{id}}</span></label>
+              <div id="my_camera" class="pre_capture_frame" ></div>
+              <br>
+              <input type="button" class="btn btn-info btn-round btn-file" value="Take Picture" onClick="take_snapshot()">	
+          </div>
+          <div class="col-lg-6" align="center">
+              <label>Result</label>
+              <div id="results" >
+                  <img width="350px" height="287px" class="after_capture_frame" src="{% static 'img/image.jpg' %}" alt="Image" />
+              </div>
+              <br>
+              <input type="button" class="btn btn-success" value="Save Picture" onclick="saveSnap()">
+          </div>	
+        </div><!--  end row -->
+       
+      </div><!-- end container -->
+      <div class="text-center">
+        <a href="{% url 'delivery_status' %}" id="save" class="btn btn-danger d-none">Back</a>
+      </div>
+      
+
+    <script language="JavaScript">
+        Webcam.set({
+         width: 350,
+         height: 287,
+         image_format: 'jpeg',
+         jpeg_quality: 90
+        });	 
+        Webcam.attach( '#my_camera' );
+       var img ;
+       function take_snapshot() {
+        Webcam.snap( function(data_uri) {
+        document.getElementById('results').innerHTML = '<img class="after_capture_frame" src="'+data_uri+'"/>';
+        $("#captured_image_data").val(data_uri);
+        img = data_uri
+        });	 
+       }
+   
+       function saveSnap(){
+      
+        $.ajax({
+               type: "POST",
+               url: "{% url 'camera' id n %}",
+               data: {image: img,
+                csrfmiddlewaretoken: "{{ csrf_token }}"}, 
+           });
+           document.getElementById("save").click();
+       }
+   </script>
+{% endblock basecontent %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Just call webcam. snap() function to capture snapshot of the webcam. 
+The function returns a data URI containing a representation of the image in the format of jpg.
+By setting the an html <a> link's 'href' attribute to the image data return, the user can download and save the snapshot -->

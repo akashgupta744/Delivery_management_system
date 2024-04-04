@@ -1,0 +1,18 @@
+{% extends "adminbase.html" %}
+{% load static %}
+{% block basecontent %}
+
+<div class="col-10" style="margin-left: 150px;">
+    
+    {% if img %}
+    <img src="{{order.delivered_img.url}}" alt="no" width="90%" height="500px">
+    {% else %}
+    <img src="{{order.invoice_img.url}}" alt="no" width="500px" height="500px">
+    {% endif %}
+
+    <a href="{% url 'delivery_status' %}">Back</a>
+</div>
+
+
+
+{% endblock basecontent %}

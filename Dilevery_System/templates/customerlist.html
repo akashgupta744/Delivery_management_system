@@ -1,0 +1,21 @@
+{% extends "adminbase.html" %}
+{% load static %}
+{% block basecontent %}
+<h3 class="text-center">Customers</h3>
+<div class="m-3">
+    <table class="table table-hover">
+        <thead class="table-dark">
+            <th>Sr.</th>
+            <th>Name</th>
+            <th>email</th>
+        </thead>
+        {% for p in All %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{p.name}}</td>
+            <td>{{p.email}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock basecontent %}

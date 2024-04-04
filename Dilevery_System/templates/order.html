@@ -1,0 +1,37 @@
+{% extends "adminbase.html" %}
+{% load static %}
+{% block basecontent %}
+  <div class="col-5 bg-dark text-white  p-3 m-auto" style="border-radius: 5%;">
+    <h4 class="text-center">Order Assignment</h4>
+    <form  method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="cname"><i class="fa-brands fa-slack p-1"></i>Customer Name</label>
+        <select name="cname" class="form-select m-1" id="detail">
+          {% for db in cus %}
+          <option value="{{db.pk}}">{{db}}</option>
+          {% endfor %}
+
+        </select>
+        <br>
+        <label for="name"><i class="fa-brands fa-slack p-1"></i>Product Name</label>
+        <input type="text" name="name" placeholder="Enter product name" required class="form-control">
+        <br>
+        <label for="image"><i class="fa-solid fa-image p-1"></i>Product image</label>
+        <input type="file" required name="image" class="form-control">
+        <br>
+        <label for="price"><i class="fa-solid fa-dollar-sign p-1"></i>Product price</label>
+        <input type="text" name="price" placeholder="Enter product price" required class="form-control">
+        <br>
+        <label for="detail"><i class="fa-solid fa-circle-info p-1"></i>Delivery Boy</label>
+        
+        <select name="boydetails" class="form-select m-1" id="detail">
+          {% for db in emp %}
+          <option value="{{db.pk}}">{{db}}</option>
+          {% endfor %}
+
+        </select>
+        <br>
+        <input type="submit" class="btn btn-outline-warning form-control" value="Generate Request">
+      </form>
+  </div>
+{% endblock basecontent %}

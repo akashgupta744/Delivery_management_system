@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% block main %}
+<h3 class="text-center mt-3" >Customer Login</h3>
+
+<div class="col-6  m-auto border border-dark" style="border-radius: 10px;">
+  <form method="POST" class="m-3">
+    {% csrf_token %}
+   
+    <div class="form-outline mb-4">
+      <input type="text" id="form3Example1cg" placeholder="enter your username" name="username" class="form-control form-control-lg" />
+      <label class="form-label" for="form3Example1cg"><i class="fa-solid fa-user p-1"></i>Username</label>
+    </div>
+
+    <div class="form-outline mb-4">
+      <input type="password" id="form3Example4cg" placeholder="enter your password" name="password" class="form-control form-control-lg" />
+      <label class="form-label" for="form3Example4cg"><i class="fa-solid fa-lock p-1"></i>Password</label>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <button type="submit"
+        class="btn btn-outline-dark btn-lg  ">login</button>
+    </div>
+    
+    <p class="text-center text-muted mt-5 mb-0"> <a href="{% url 'forget' %}" class="fw-bold text-body"><u >Forget password</u></a></p>
+
+    <p class="text-center text-muted mt-5 mb-0">You no have an account? <a href="{% url 'customersignup' %}" class="fw-bold text-body"><u >Signup here</u></a></p>
+            
+  </form>
+
+</div>
+  
+{% endblock main %}
